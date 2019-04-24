@@ -72,6 +72,8 @@ One of the major difference between this protocol and `BetterHash` is that `Bett
 
 - `TLS 1.3`. gRPC uses a widely used encryption/authentication standard (TLS 1.3) and existing public key infrastrature whereas `BetterHash` rolls its own encryption scheme and cannot interact with the PKI system, instead relying on insecure trust-on-first-use authenication or users maually fetching public keys from the internet.
 
+- `Guaranteed Correct Documentation`. The `.proto` is the canonical format for API contracts which avoids lackluster or confusing documentation. 
+
 
 ## References
 [1] [BetterHash Mining Protocol](https://github.com/TheBlueMatt/bips/blob/betterhash/bip-XXXX.mediawiki#Abstract)
