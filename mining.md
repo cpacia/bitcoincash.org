@@ -62,5 +62,18 @@ pool software could also take the form of something resembling p2pool which dist
 but the quickest path to getting this deployed is for the controller to behave as a shim between the legacy stratum protocol and the new protocols. 
 This means the mining software does not need to be patched to be compatible with the new mining network.
 
+gRPC
+===============
+One of the major difference between this protocol and `BetterHash` is that `BetterHash` uses a custom wire protocol and custom encryption and authentication schemes, whereas we just use gRPC[2]. Both `BetterHash` and gRPC use binary serialization which is a major improvement over both `getblocktemplate` and `stratum`, but gRPC has the following features which `BetterHash` does not:
+
+- `Auto generated client and server libraries`. The `protoc` compiler is capable of auto-generating the serialization, deserialization, and client code for just about every major language. This eleminates the need to write what would surely be thousands of lines of boilerplate code just to get started writing a client or server like you would with `BetterHash`.
+
+- `Stream multiplexing`. gRPC makes use of HTTP2 stream multiplexing which eliminates head-of-line blocking.
+
+- `TLS 1.3`. gRPC uses a widely used encryption/authentication standard (TLS 1.3) and existing public key infrastrature whereas `BetterHash` rolls its own encryption scheme and cannot interact with the PKI system, instead relying on insecure trust-on-first-use authenication or users maually fetching public keys from the internet.
+
+
 ## References
 [1] [BetterHash Mining Protocol](https://github.com/TheBlueMatt/bips/blob/betterhash/bip-XXXX.mediawiki#Abstract)
+
+[2] [gRPC website](https://grpc.io/)
